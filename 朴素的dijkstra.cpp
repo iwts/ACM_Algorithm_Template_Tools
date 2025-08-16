@@ -1,5 +1,6 @@
-// 详细的图可看 \笔记\ACM\图论\博客-dijkstra与可乐倒水问题 目录下
-
+/* 关于里面的例子，图和边都应该根据实际题意进行构造
+   所以这里直接填入数据了，对应的图在当前目录下：朴素dij.png
+*/
 #include<iostream>
 #include<string>
 #define MAX 233
@@ -12,6 +13,7 @@ int vec[MAX][MAX];
 int begins;
 string road[MAX];
 
+// 输出每次dis数组的变化情况
 void test_print_dis(){
     for(int i = 1;i <= 6;i++){
         cout << dis[i] << " ";
@@ -19,6 +21,7 @@ void test_print_dis(){
     cout << endl;
 }
 
+// 输出最终的最短路径
 void test_print_road(){
     for(int i = 1;i <= 6;i++){
         cout << "v" << i << " road is : " << road[i] << endl;
@@ -46,7 +49,7 @@ void init(){
             continue;
         }
         dis[i] = vec[begins][i];
-        road[i] = "v1->v"+to_string(i);
+        road[i] = "v1->v"+to_string(i); // 路径的初始化
         road[begins] = "v"+to_string(begins);
     }
     dis[0] = INF; // dijkstra第一次运行时作为比较使用
@@ -70,7 +73,7 @@ void dijkstra(){
             if (dis[i] == 0) continue;
             if (dis[i] < vec[min][i] + dis[min]) continue;
             dis[i] = vec[min][i] + dis[min];
-            road[i] = road[min]+"->v"+to_string(i);
+            road[i] = road[min]+"->v"+to_string(i); // 更新路径
         }
         test_print_dis();
     }
